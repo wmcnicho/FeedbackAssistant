@@ -1,5 +1,6 @@
 import React from 'react'
 import Button from '@mui/material/Button';
+import PostComment from './postComment';
 
 class GitHubButton extends React.Component {
     constructor(props) {
@@ -8,13 +9,15 @@ class GitHubButton extends React.Component {
 
     onclick() {
         // This is where I call your code
+        console.log("Clicked.")
+        PostComment()
+        
     }
 
-    
     render() {
         return(
             <div>
-                <Button variant="contained">Post Comment to Github</Button>
+                <Button variant="contained" onClick={PostComment()}>Post Comment to Github</Button>
             </div>
         )
     }
