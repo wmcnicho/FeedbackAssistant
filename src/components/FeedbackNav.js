@@ -2,28 +2,16 @@ import React from 'react'
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
-import InboxIcon from '@mui/icons-material/Inbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import { Tooltip, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Paper from '@mui/material/Paper';
 import Fab from '@mui/material/Fab';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListSubheader from '@mui/material/ListSubheader';
-import Avatar from '@mui/material/Avatar';
-import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
-import MoreIcon from '@mui/icons-material/MoreVert';
-
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 
@@ -82,9 +70,11 @@ class FeedbackNav extends React.Component {
                           <GitHubIcon />
                         </IconButton>
                       </Tooltip>
-                      <StyledFab color="secondary" aria-label="add">
-                        <AddIcon />
-                      </StyledFab>
+                      <Tooltip title="Add More Feedback" placement='top'>
+                        <StyledFab color="secondary" aria-label="add">
+                          <AddIcon />
+                        </StyledFab>
+                      </Tooltip>
                       <Box sx={{ flexGrow: 1 }} />
                       <Tooltip title="Select Grading Directoy">
                         <IconButton color="inherit">
