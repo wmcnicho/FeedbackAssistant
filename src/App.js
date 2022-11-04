@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import FeedbackNav from './components/FeedbackNav'
 import FeedbackInfoPanel from './components/FeedbackInfoPanel';
+import StudentNavigation from './components/StudentNavigation';
 
 function App() {
   return (
@@ -13,8 +14,11 @@ function App() {
           <Grid xs={4}>
             <FeedbackNav/>
           </Grid>
-          <Grid xs={8}>
-            <FeedbackInfoPanel/>
+          <Grid xs={8} sx={{background:"lightgrey", height:"100vh"}}>
+            <Box>
+              <StudentNavigation/>
+              <FeedbackInfoPanel/>
+            </Box>
           </Grid>
         </Grid>
       </Box>
