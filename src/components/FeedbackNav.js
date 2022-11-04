@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
-import { Typography } from '@mui/material';
+import { Tooltip, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -23,6 +23,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
+
+import GitHubIcon from '@mui/icons-material/GitHub';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -74,19 +77,20 @@ class FeedbackNav extends React.Component {
                   </Box>
                   <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                     <Toolbar>
-                      <IconButton color="inherit" aria-label="open drawer">
-                        <MenuIcon />
-                      </IconButton>
+                      <Tooltip title="Select GitHub Classroom">
+                        <IconButton color="inherit">
+                          <GitHubIcon />
+                        </IconButton>
+                      </Tooltip>
                       <StyledFab color="secondary" aria-label="add">
                         <AddIcon />
                       </StyledFab>
                       <Box sx={{ flexGrow: 1 }} />
-                      <IconButton color="inherit">
-                        <SearchIcon />
-                      </IconButton>
-                      <IconButton color="inherit">
-                        <MoreIcon />
-                      </IconButton>
+                      <Tooltip title="Select Grading Directoy">
+                        <IconButton color="inherit">
+                          <FolderOpenIcon />
+                        </IconButton>
+                      </Tooltip>
                     </Toolbar>
                   </AppBar>
                 </Box>
