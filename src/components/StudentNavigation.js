@@ -3,6 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import GradingIcon from '@mui/icons-material/Grading';
 import { Button, ButtonGroup, IconButton, Input, Tooltip, Typography } from '@mui/material';
 
@@ -13,7 +14,6 @@ class StudentNavigation extends React.Component {
     }
 
     handleScoreChange(event, newScore) {
-        console.log("Callback")
         if (newScore > 100){
             newScore = 100;
         } 
@@ -31,27 +31,40 @@ class StudentNavigation extends React.Component {
                 <Grid container sx={{display:"block", background:"white"}}>
                     <Grid>
                         <Grid sx={{display:"flex", justifyContent:"space-between"}}>
-                            <Button variant="contained" color="primary">
-                                <ArrowLeftIcon />
-                            </Button>
+                            <Tooltip title="Previous Submission">
+                                <Button variant="contained" color="primary">
+                                    <ArrowLeftIcon />
+                                </Button>
+                            </Tooltip>
                             <Button>
-                                <Typography component='h6' variant='h4'>@wmcnicho</Typography>
+                                <Tooltip title="View On Github">
+                                    <Typography component='h6' variant='h4'>@wmcnicho</Typography>
+                                </Tooltip>
                             </Button>
-                            <Button variant="contained" color="primary">
-                            <ArrowRightIcon />
-                            </Button>
+                            <Tooltip title="Next Submission" placement='bottom'>
+                                <Button variant="contained" color="primary">
+                                    <ArrowRightIcon />
+                                </Button>
+                            </Tooltip>
                         </Grid>
                         <Grid>
-                            {/* <Box sx={{display:"flex", justifyContent:"space-around"}}>
-                                <Button variant="contained" color="primary">
-                                            View Code
-                                </Button>
-                            </Box> */}
+                                <ButtonGroup variant="outlined">
+                                    <Tooltip title="Post Score">
+                                        <Button color="primary">
+                                            <CloudUploadIcon/>
+                                        </Button>
+                                    </Tooltip>
+                                    <Tooltip title="View Gradesheet">
+                                        <Button color="primary">
+                                            <GradingIcon/>
+                                        </Button>
+                                    </Tooltip>
+                                </ButtonGroup>
                         </Grid>
                         <Grid>
                             <Box sx={{display:"flex", justifyContent:"space-around"}}>
                                 <Box>
-                                    <Typography variant='overline'>Current Points</Typography>
+                                    <Typography variant='h6' display="inline">Current Points</Typography>
                                     <Input
                                             px={3}
                                             sx={{
@@ -71,19 +84,22 @@ class StudentNavigation extends React.Component {
                                                 sx:{textAlign:"right"}
                                             }}
                                         />
-                                        <ButtonGroup variant="outlined">
-                                            <Button color="primary">
-                                                Post Score
-                                            </Button>
-                                            <Tooltip title="View Gradesheet">
-                                                <Button color="primary">
-                                                    <GradingIcon/>
-                                                </Button>
-                                            </Tooltip>
-                                        </ButtonGroup>
                                 </Box>
                             </Box>
-                            
+                            <Grid>
+                                {/* <ButtonGroup variant="outlined">
+                                    <Tooltip title="Post Score">
+                                        <Button color="primary">
+                                            <CloudUploadIcon/>
+                                        </Button>
+                                    </Tooltip>
+                                    <Tooltip title="View Gradesheet">
+                                        <Button color="primary">
+                                            <GradingIcon/>
+                                        </Button>
+                                    </Tooltip>
+                                </ButtonGroup> */}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>

@@ -14,7 +14,7 @@ function App() {
           <Grid xs={4}>
             <FeedbackNav/>
           </Grid>
-          <Grid xs={8} sx={{background:"lightgrey", height:"100vh"}}>
+          <Grid xs={8} sx={{background:"#eeeeee", height:"100vh"}}>
             <Box>
               <StudentNavigation/>
               <FeedbackInfoPanel/>
