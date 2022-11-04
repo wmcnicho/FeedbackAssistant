@@ -86,20 +86,6 @@ class StudentNavigation extends React.Component {
                                         />
                                 </Box>
                             </Box>
-                            <Grid>
-                                {/* <ButtonGroup variant="outlined">
-                                    <Tooltip title="Post Score">
-                                        <Button color="primary">
-                                            <CloudUploadIcon/>
-                                        </Button>
-                                    </Tooltip>
-                                    <Tooltip title="View Gradesheet">
-                                        <Button color="primary">
-                                            <GradingIcon/>
-                                        </Button>
-                                    </Tooltip>
-                                </ButtonGroup> */}
-                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
