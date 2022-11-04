@@ -1,4 +1,5 @@
 const simpleGit = require("simple-git");
+const { format } = require("@fast-csv/format");
 const fs = require("fs");
 
 simpleGit().clean(simpleGit.CleanOptions.FORCE);
@@ -40,7 +41,50 @@ async function fetchGithubUrls(repos, path) {
     return results.map(res => res.value);
 }
 
+/**
+ * Reads the feedback object from a file
+ * 
+ * @param {string} path Path to the feedback object
+ */
+function fetchFeedbackObj(path) {
+    return JSON.parse(fs.readFileSync(path));
+}
+
+/**
+ * Saves the feedback object to a file as a JSON
+ * 
+ * @param {*} feedback Feedback object
+ * @param {*} path Path to save with
+ */
+function saveFeedbackObj(feedback, path) {
+    fs.writeFileSync(path, JSON.stringify(feedback));
+}
+
+/**
+ * Writes all feedback to a CSV file
+ * 
+ * @param {Object} feedback A map from github handle to feedback
+ * @param {string} path Directory to save the file
+ */
+function writeFeedbackToCsvFile(feedback, path) {
+    const stream = format({headers: true});
+    const ws = fs.createWriteStream(`${path}`);
+    stream.pipe(ws);
+
+    for (const [key, value] of Object.entries(feedback)) {
+        stream.write({
+            github: key,
+            ...value,
+        });
+    }
+
+    stream.end();
+}
+
 module.exports = {
     fetchRepos,
-    fetchGithubUrls
+    fetchGithubUrls,
+    fetchFeedbackObj,
+    saveFeedbackObj,
+    writeFeedbackToCsvFile,
 }
