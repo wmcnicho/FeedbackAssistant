@@ -9,7 +9,7 @@ class FeedbackInfoPanel extends React.Component {
     render() {
         return(
             <React.Fragment>
-                <Box sx={{background:"lightgrey", height:"100vh"}} p={6}>
+                <Box p={6}>
                     <Typography variant="h3">Feedback 1</Typography>
                     <Box py={4}>
                         <Paper elevation={3}>
