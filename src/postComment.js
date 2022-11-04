@@ -1,30 +1,19 @@
-// TOKEN = process.env.GITHUB_TOKEN
+import { octokit } from "./App";
 
-const { Octokit } = require("@octokit/rest");
-const apiKey = `${process.env.REACT_APP_API_KEY}`
-const octokit = new Octokit({ 
-    auth: apiKey,
-  });
-
-export default function PostComment() {
-    // console.log(apiKey)
+export default function PostComment(classRoomName, repoName, commentBody) {
+    console.log("Posting Comment!")
+    
     const {data: user} = octokit.request('Get /user')
-    // console.log(`authenticated as ${user.login}`)
 
-    const owner = "feedbackassistant"
-    const repo = "test-token-JAEWOOKe"
+    const owner = classRoomName
+    const repo = repoName
 
     const { comment } = octokit.rest.issues.createComment({
         owner,
         repo,
         issue_number: 1,
-        body: "👋 Thanks for reporting!",
+        body: commentBody,
     });
-
-    // console.log("Comment created: %s", comment);
 }
-
-console.log("Hello auth!");
-// (async () => { run() })()
 
 export { PostComment }; 
