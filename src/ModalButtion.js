@@ -25,11 +25,13 @@ class ModalButtion extends Component {
         this.state = {
             open: false,
             score: 0,
-            feedback: "",
-            title: ""
+            feedback_body: "",
+            title: "",
+            feedback: this.props.feedback
         }
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleScoreChange(event, newScore) {
@@ -45,10 +47,10 @@ class ModalButtion extends Component {
         this.setState(newState)
     }
 
-    handleFeedbackChange(event, newFeedback) {
-        console.log("New feedback: ", newFeedback)
+    handleFeedbackBodyChange(event, newFeedbackBody) {
+        console.log("New feedback: ", newFeedbackBody)
         let newState = this.state;
-        newState.feedback = newFeedback;
+        newState.feedback_body = newFeedbackBody;
         this.setState(newState)
     }
 
@@ -59,7 +61,15 @@ class ModalButtion extends Component {
         this.setState(newState)
     }
 
-
+    handleSubmit() {
+        console.log("Submit")
+        let newState = this.state;
+        const feedback = [{"title": this.state.title}, {"score": this.state.score}, {"feedback_body": this.state.feedback_body}]
+        console.log(feedback)
+        newState.open = false;
+        newState.feedback = feedback
+        this.props.feedbackHandler(newState.feedback)
+    }
     handleOpen() {
         this.setState({open: true})
     }
@@ -115,11 +125,11 @@ class ModalButtion extends Component {
                             label="Feedback"
                             multiline
                             maxRows={4}
-                            value={this.state.feedback}
-                            onChange={(event) => this.handleFeedbackChange(event, event.target.value)}
+                            value={this.state.feedback_body}
+                            onChange={(event) => this.handleFeedbackBodyChange(event, event.target.value)}
                             variant="standard"
                         />
-                        <Button variant="contained">Submit</Button>
+                        <Button onClick={this.handleSubmit} variant="contained">Submit</Button>
                         </Stack>
                     </Box>
                 </Modal>
