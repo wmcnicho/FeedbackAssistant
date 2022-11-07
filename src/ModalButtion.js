@@ -26,6 +26,7 @@ class ModalButtion extends Component {
             open: false,
             score: 0,
             feedback_body: "",
+            feedback_abstract: "",
             title: "",
             feedback: this.props.feedback
         }
@@ -47,6 +48,13 @@ class ModalButtion extends Component {
         this.setState(newState)
     }
 
+    handleFeedbackAbstractChange(event, newFeedbackAbstract) {
+        console.log("New feedback: ", newFeedbackAbstract)
+        let newState = this.state;
+        newState.feedback_abstract = newFeedbackAbstract;
+        this.setState(newState)
+    }
+
     handleFeedbackBodyChange(event, newFeedbackBody) {
         console.log("New feedback: ", newFeedbackBody)
         let newState = this.state;
@@ -64,7 +72,7 @@ class ModalButtion extends Component {
     handleSubmit() {
         console.log("Submit")
         let newState = this.state;
-        const feedback = [{"title": this.state.title}, {"score": this.state.score}, {"feedback_body": this.state.feedback_body}]
+        const feedback = [{"title": this.state.title}, {"score": this.state.score}, {"feedback_abstract": this.state.feedback_abstract}, {"feedback_body": this.state.feedback_body}]
         console.log(feedback)
         newState.open = false;
         newState.feedback = feedback
@@ -119,7 +127,12 @@ class ModalButtion extends Component {
                                 />
                             </Box>
                         </Box>
-
+                        <TextField 
+                            id="standard-basic" 
+                            label="Abstract" variant="standard" 
+                            value={this.state.feedback_abstract}
+                            onChange={(event) => this.handleFeedbackAbstractChange(event, event.target.value)}
+                        />
                         <TextField
                             id="standard-multiline-static"
                             label="Feedback"
