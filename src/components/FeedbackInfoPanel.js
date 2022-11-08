@@ -8,10 +8,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 class FeedbackInfoPanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            copied_feedback : this.props.currentFeedback.long_desc,
-            copied: false,
-        }
     }
     handleClick() {
         const classRoomName = "feedbackassistant"
@@ -40,8 +36,7 @@ class FeedbackInfoPanel extends React.Component {
                     </Box>
                     <Box display={{display:'flex', justifyContent:"space-evenly"}}>
                         <Button variant="contained" endIcon={<GitHubIcon />} onClick={this.handleClick} >Add To Github</Button>
-                        <CopyToClipboard text={this.state.copied_feedback}
-                            onCopy={() => this.setState({copied: true})}>
+                        <CopyToClipboard text={this.props.currentFeedback.long_desc}>
                             <Button variant="contained" endIcon={<ContentPasteIcon />}>Copy To Clipboard</Button>
                         </CopyToClipboard>
                     </Box>

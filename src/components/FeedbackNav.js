@@ -16,6 +16,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import FeedbackModal from './FeedbackModal';
 import AssignmentModal from './AssignmentModal'
+import FeedbackNavItem from './FeedbackNavItem';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -33,13 +34,22 @@ class FeedbackNav extends React.Component {
           showModal: false,
           showAssignmentModal: false,
           gitClassroomInfo: {"Classroom" : "", "Assignment": ""},
-          feedback: []
+          feedbacks: this.props.feedbacks,
+          selected: this.props.selected
         }
         this.handleFeedbackModal = this.handleFeedbackModal.bind(this);
         this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this)
         this.handleAssignmentModal = this.handleAssignmentModal.bind(this)
         this.handleAssignmentUpdate = this.handleAssignmentUpdate.bind(this)
     }
+
+    handleListItemClick(event, index) {
+      let newState = this.state
+      newState.selected = index;
+      this.setState(newState);
+      this.props.handler(index);      
+    }
+
     handleFeedbackModal() {
       let newState = this.state
       newState.showModal = true
@@ -52,12 +62,12 @@ class FeedbackNav extends React.Component {
       this.setState(newState)
     }
 
-    handleFeedbackUpdate(feedback, showModal) {
+    handleFeedbackUpdate(feedbacks, showModal) {
       let newState = this.state;
-      newState.feedback = feedback;
+      newState.feedbacks = feedbacks;
       newState.showModal = showModal;
       // console.log("SHOW MODAL?: ", showModal)
-      console.log(newState.feedback)
+      console.log(newState.feedbacks)
       this.setState(newState)
     }
 
@@ -74,7 +84,7 @@ class FeedbackNav extends React.Component {
               <>
               {this.state.showModal? 
               <FeedbackModal 
-                feedback={this.state.feedback}
+                feedback={this.state.feedbacks}
                 showModal={this.state.showModal}
                 feedbackHandler={this.handleFeedbackUpdate}              
               /> : null}
@@ -105,16 +115,13 @@ class FeedbackNav extends React.Component {
                     <Divider />
                     <nav aria-label="secondary mailbox folders">
                       <List>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemText primary="Feedback Item 1" />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton component="a" href="#simple-list">
-                            <ListItemText primary="Feedback Item 2" />
-                          </ListItemButton>
-                        </ListItem>
+                        {this.state.feedbacks.map((fb, index) => (
+                            <FeedbackNavItem 
+                                  id={fb.title}
+                                  selected={fb === this.state.selected}
+                                  onClick={(event) => this.handleListItemClick(event, index)}
+                                  title={fb.title}/>
+                          ))}
                       </List>
                     </nav>
                   </Box>
