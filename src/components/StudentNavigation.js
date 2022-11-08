@@ -5,12 +5,16 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import GradingIcon from '@mui/icons-material/Grading';
-import { Button, ButtonGroup, IconButton, Input, Tooltip, Typography } from '@mui/material';
+import { Button, ButtonGroup, IconButton, Input, Link, Tooltip, Typography } from '@mui/material';
 
 class StudentNavigation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {"score": 100}; 
+        this.students = props.students;
+        this.state = {
+                "score": 100,
+                "currentStudent": this.props.currentStudent
+            }; 
     }
 
     handleScoreChange(event, newScore) {
@@ -38,7 +42,11 @@ class StudentNavigation extends React.Component {
                             </Tooltip>
                             <Button>
                                 <Tooltip title="View On Github">
-                                    <Typography component='h6' variant='h4'>@wmcnicho</Typography>
+                                    <Typography component='h6' variant='h4'>
+                                        <Link href={this.students[this.state.currentStudent].url}>
+                                            {this.state.currentStudent}
+                                        </Link>
+                                    </Typography>
                                 </Tooltip>
                             </Button>
                             <Tooltip title="Next Submission" placement='bottom'>
