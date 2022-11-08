@@ -1,5 +1,5 @@
-const simpleGit = require("simple-git");
-const { format } = require("@fast-csv/format");
+const simpleGit =  require("simple-git");
+const { format } =  require("@fast-csv/format");
 const fs = require("fs");
 
 simpleGit().clean(simpleGit.CleanOptions.FORCE);
