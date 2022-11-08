@@ -57,7 +57,7 @@ class AppContainer extends React.Component {
         this.state = {
                 currentStudentHandle: "github1",
                 selectedFeedbackId: 1,
-                currentFeedbackItem: this.data.feedback_items["1"]
+                currentFeedbackItem: this.data.feedback_items["1"],
         }
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
     }

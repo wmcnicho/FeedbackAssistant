@@ -36,15 +36,17 @@ class FeedbackNav extends React.Component {
         this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this)
     }
     handleClick() {
+      console.log("SHOW!")
       let newState = this.state
       newState.showModal = true
       this.setState(newState)
     }
 
-    handleFeedbackUpdate(feedback) {
+    handleFeedbackUpdate(feedback, showModal) {
       let newState = this.state;
       newState.feedback = feedback;
-      newState.showModal = false;
+      newState.showModal = showModal;
+      // console.log("SHOW MODAL?: ", showModal)
       console.log(newState.feedback)
       this.setState(newState)
     }

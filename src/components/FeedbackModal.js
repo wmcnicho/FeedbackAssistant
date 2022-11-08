@@ -6,6 +6,10 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 import Stack from '@mui/material/Stack';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 const style = {
     position: 'absolute',
@@ -25,7 +29,8 @@ class FeedbackModal extends Component {
         this.state = {
             showModal: this.props.showModal,
             title: "",
-            score: 0,
+            type: "",
+            // score: 0,
             short_desc: "",
             long_desc: "",
             feedback: this.props.feedback
@@ -35,15 +40,21 @@ class FeedbackModal extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleScoreChange(event, newScore) {
-        if (newScore > 100){
-            newScore = 100;
-        } 
-        if (newScore < 0) {
-            newScore = 0;  
-        }
+    // handleScoreChange(event, newScore) {
+    //     if (newScore > 100){
+    //         newScore = 100;
+    //     } 
+    //     if (newScore < 0) {
+    //         newScore = 0;  
+    //     }
+    //     let newState = this.state;
+    //     newState.score = newScore;
+    //     this.setState(newState)
+    // }
+
+    handleTypeChange(event, newType) {
         let newState = this.state;
-        newState.score = newScore;
+        newState.type = newType;
         this.setState(newState)
     }
 
@@ -67,18 +78,25 @@ class FeedbackModal extends Component {
 
     handleSubmit() {
         let newState = this.state;
-        const feedback = [{"title": this.state.title, "score": this.state.score, "short_desc": this.state.short_desc, "long_desc": this.state.long_desc}]
+        const feedback = [{"title": this.state.title, "type": this.state.type, "short_desc": this.state.short_desc, "long_desc": this.state.long_desc}]
         // console.log(feedback)
         newState.showModal = false;
         // newState.feedback = feedback
         newState.feedback = [...this.state.feedback, feedback]
-        this.props.feedbackHandler(newState.feedback)
+        this.props.feedbackHandler(newState.feedback, newState.showModal)
     }
     handleOpen() {
-        this.setState({showModal: true})
+        // this.setState({showModal: true})
+        let newState = this.state;
+        newState.showModal = true;
+        this.setState(newState)
     }
     handleClose() {
-        this.setState({showModal: false})
+        // this.setState({showModal: false})
+        let newState = this.state;
+        newState.showModal = false;
+        this.setState(newState)
+        this.props.feedbackHandler(newState.feedback, newState.showModal)
     }
 
     render() {
@@ -98,7 +116,7 @@ class FeedbackModal extends Component {
                         value={this.state.title}
                         onChange={(event) => this.handleTitleChange(event, event.target.value)}
                     />
-                    <Box sx={{display:"flex", justifyContent:"space-around"}}>
+                    {/* <Box sx={{display:"flex", justifyContent:"space-around"}}>
                         <Box>
                             <Typography variant='h7' display="inline"> Points Deducted</Typography>
                             <Input
@@ -121,16 +139,35 @@ class FeedbackModal extends Component {
                                     }}
                                 />
                             </Box>
-                        </Box>
+                        </Box> */}
+
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.type}
+                                label="Type"
+                                onChange={(event) => this.handleTypeChange(event, event.target.value)}
+                            >
+                                <MenuItem value={"Missing"}>Missing</MenuItem>
+                                <MenuItem value={"Major"}>Major</MenuItem>
+                                <MenuItem value={"Minor"}>Minor</MenuItem>
+                                <MenuItem value={"Style Good"}>Style Good</MenuItem>
+                                <MenuItem value={"Style Correction"}>Style Correction</MenuItem>
+                                <MenuItem value={"Info"}>Info</MenuItem>
+                                <MenuItem value={"Positive"}>Positive</MenuItem>
+                            </Select>
+                        </FormControl>                        
                         <TextField 
                             id="standard-basic" 
-                            label="Abstract" variant="standard" 
+                            label="Short description" variant="standard" 
                             value={this.state.short_desc}
                             onChange={(event) => this.handleShortDescChange(event, event.target.value)}
                         />
                         <TextField
                             id="standard-multiline-static"
-                            label="Feedback"
+                            label="Long description"
                             multiline
                             maxRows={4}
                             value={this.state.long_desc}
