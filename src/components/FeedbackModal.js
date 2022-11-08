@@ -67,10 +67,11 @@ class FeedbackModal extends Component {
 
     handleSubmit() {
         let newState = this.state;
-        const feedback = [{"title": this.state.title}, {"score": this.state.score}, {"short_desc": this.state.short_desc}, {"long_desc": this.state.short_des}]
+        const feedback = [{"title": this.state.title, "score": this.state.score, "short_desc": this.state.short_desc, "long_desc": this.state.long_desc}]
         // console.log(feedback)
         newState.showModal = false;
-        newState.feedback = feedback
+        // newState.feedback = feedback
+        newState.feedback = [...this.state.feedback, feedback]
         this.props.feedbackHandler(newState.feedback)
     }
     handleOpen() {

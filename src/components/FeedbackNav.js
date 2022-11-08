@@ -45,6 +45,7 @@ class FeedbackNav extends React.Component {
       let newState = this.state;
       newState.feedback = feedback;
       newState.showModal = false;
+      console.log(newState.feedback)
       this.setState(newState)
     }
     
