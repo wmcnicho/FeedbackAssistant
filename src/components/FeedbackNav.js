@@ -14,6 +14,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import FeedbackNavItem from './FeedbackNavItem';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -27,6 +28,7 @@ const StyledFab = styled(Fab)({
 class FeedbackNav extends React.Component {
     constructor(props) {
         super(props); 
+        this.feedback = this.props.feedback;
     }
 
     render() {
@@ -46,20 +48,13 @@ class FeedbackNav extends React.Component {
                           </Box>
                         </ListItem>
                       </List>
-                    </nav>
+                    </nav> 
                     <Divider />
                     <nav aria-label="secondary mailbox folders">
                       <List>
-                        <ListItem disablePadding>
-                          <ListItemButton>
-                            <ListItemText primary="Feedback Item 1" />
-                          </ListItemButton>
-                        </ListItem>
-                        <ListItem disablePadding>
-                          <ListItemButton component="a" href="#simple-list">
-                            <ListItemText primary="Feedback Item 2" />
-                          </ListItemButton>
-                        </ListItem>
+                         {Object.keys(this.feedback).map(fb => (
+                          <FeedbackNavItem key={fb.title} title={this.feedback[fb].title}/>
+                         ))}
                       </List>
                     </nav>
                   </Box>

@@ -5,22 +5,23 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 
 class FeedbackInfoPanel extends React.Component {
     constructor(props) {
-        super(props); 
+        super(props);
+        this.state= {"feedbackObj": this.props.currentFeedback} 
     }
 
     render() {
         return(
             <React.Fragment>
                 <Box p={6}>
-                    <Typography variant="h3">Feedback 1</Typography>
+                    <Typography variant="h3">{this.state.feedbackObj.title}</Typography>
                     <Box py={4}>
                         <Paper elevation={3}>
-                            <Typography variant="h6">Brief Description for context</Typography>
+                            <Typography variant="h6">{this.state.feedbackObj.short_desc}</Typography>
                         </Paper>
                     </Box>
                     <Box py={4}>
                         <Paper  elevation={3}>
-                            <Typography variant="body1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam</Typography>
+                            <Typography variant="body1">{this.state.feedbackObj.long_desc}</Typography>
                         </Paper>
                     </Box>
                     <Box display={{display:'flex', justifyContent:"space-evenly"}}>
