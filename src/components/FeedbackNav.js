@@ -14,6 +14,8 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import FeedbackModal from './FeedbackModal';
+import AssignmentModal from './AssignmentModal'
 import FeedbackNavItem from './FeedbackNavItem';
 
 const StyledFab = styled(Fab)({
@@ -27,20 +29,74 @@ const StyledFab = styled(Fab)({
 
 class FeedbackNav extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {"selected": parseInt(this.props.selected)} 
-        this.feedback = this.props.feedback;
+        super(props); 
+        this.state = {
+          showModal: false,
+          showAssignmentModal: false,
+          gitClassroomInfo: {"Classroom" : "", "Assignment": ""},
+          feedbacks: this.props.feedbacks,
+          selected: this.props.selected
+        }
+        this.handleFeedbackModal = this.handleFeedbackModal.bind(this);
+        this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this)
+        this.handleAssignmentModal = this.handleAssignmentModal.bind(this)
+        this.handleAssignmentUpdate = this.handleAssignmentUpdate.bind(this)
     }
 
     handleListItemClick(event, index) {
-      let newState = this.state;
+      let newState = this.state
       newState.selected = index;
       this.setState(newState);
-      this.props.handler(index);
+      this.props.handler(index);      
     }
 
+    handleFeedbackModal() {
+      let newState = this.state
+      newState.showModal = true
+      this.setState(newState)
+    }
+
+    handleAssignmentModal() {
+      let newState = this.state
+      newState.showAssignmentModal = true
+      this.setState(newState)
+    }
+
+    handleFeedbackUpdate(feedbacks, showModal) {
+      let newState = this.state;
+      newState.feedbacks = feedbacks;
+      newState.showModal = showModal;
+      // console.log("SHOW MODAL?: ", showModal)
+      console.log(newState.feedbacks)
+      this.setState(newState)
+      this.props.feedbackHandler(newState.feedbacks); 
+    }
+
+    handleAssignmentUpdate(gitClassroomInfo, showAssignmentModal) {
+      let newState = this.state;
+      newState.gitClassroomInfo = gitClassroomInfo;
+      newState.showAssignmentModal = showAssignmentModal;
+      console.log(newState.gitClassroomInfo)
+      this.setState(newState)      
+    }
+    
     render() {
             return (
+              <>
+              {this.state.showModal? 
+              <FeedbackModal 
+                feedback={this.state.feedbacks}
+                showModal={this.state.showModal}
+                feedbackHandler={this.handleFeedbackUpdate}              
+              /> : null}
+              {this.state.showAssignmentModal? 
+
+              <AssignmentModal 
+              gitClassroomInfo={this.state.gitClassroomInfo}
+                showAssignmentModal={this.state.showAssignmentModal}
+                assignmentHandler={this.handleAssignmentUpdate}              
+              /> : null}
+
                 <Box display={{display:'flex', flexDirection:'column', height:"100vh"}}>
                   <Box sx={{flexGrow:1}}>
                     <nav aria-label="main mailbox folders">
@@ -56,29 +112,29 @@ class FeedbackNav extends React.Component {
                           </Box>
                         </ListItem>
                       </List>
-                    </nav> 
+                    </nav>
                     <Divider />
                     <nav aria-label="secondary mailbox folders">
                       <List>
-                         {Object.keys(this.feedback).map(fb => (
-                          <FeedbackNavItem 
-                                id={this.feedback[fb].title}
-                                selected={parseInt(fb) === this.state.selected}
-                                onClick={(event) => this.handleListItemClick(event, parseInt(fb))}
-                                title={this.feedback[fb].title}/>
-                         ))}
+                        {this.state.feedbacks.map((fb, index) => (
+                            <FeedbackNavItem 
+                                  id={fb.title}
+                                  selected={fb === this.state.selected}
+                                  onClick={(event) => this.handleListItemClick(event, index)}
+                                  title={fb.title}/>
+                          ))}
                       </List>
                     </nav>
                   </Box>
                   <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                     <Toolbar>
                       <Tooltip title="Select GitHub Classroom">
-                        <IconButton color="inherit">
+                        <IconButton color="inherit" onClick={this.handleAssignmentModal}>
                           <GitHubIcon />
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Add More Feedback" placement='top'>
-                        <StyledFab color="secondary" aria-label="add">
+                        <StyledFab color="secondary" aria-label="add" onClick={this.handleFeedbackModal}>
                           <AddIcon />
                         </StyledFab>
                       </Tooltip>
@@ -91,6 +147,8 @@ class FeedbackNav extends React.Component {
                     </Toolbar>
                   </AppBar>
                 </Box>
+              </>
+
         )
     }
 }

@@ -37,7 +37,7 @@ class StudentNavigation extends React.Component {
                         <Grid sx={{display:"flex", justifyContent:"space-between"}}>
                             <Tooltip title="Previous Submission">
                                 <Button variant="contained" color="primary">
-                                    <ArrowLeftIcon />
+                                    <ArrowLeftIcon fontSize='large' />
                                 </Button>
                             </Tooltip>
                             <Button>
@@ -51,11 +51,11 @@ class StudentNavigation extends React.Component {
                             </Button>
                             <Tooltip title="Next Submission" placement='bottom'>
                                 <Button variant="contained" color="primary">
-                                    <ArrowRightIcon />
+                                    <ArrowRightIcon fontSize='large' />
                                 </Button>
                             </Tooltip>
                         </Grid>
-                        <Grid>
+                        {/* <Grid>
                                 <ButtonGroup variant="outlined">
                                     <Tooltip title="Post Score">
                                         <Button color="primary">
@@ -93,8 +93,8 @@ class StudentNavigation extends React.Component {
                                             }}
                                         />
                                 </Box>
-                            </Box>
-                        </Grid>
+                            </Box> */}
+                        {/* </Grid> */}
                     </Grid>
                 </Grid>
             </React.Fragment>

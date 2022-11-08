@@ -2,10 +2,21 @@ import { Paper, Typography, Box, Button } from '@mui/material';
 import React from 'react'
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import PostComment from './PostComment';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class FeedbackInfoPanel extends React.Component {
     constructor(props) {
         super(props);
+    }
+    handleClick() {
+        const classRoomName = "feedbackassistant"
+        const assignmentName = "test-token"
+        const studentGithubId = "JAEWOOKe"
+        const commentBody = "THE GRADE MASTER 9000 IS HERE."
+        const repoName = `${assignmentName}-${studentGithubId}`
+        console.log(classRoomName, repoName, commentBody)
+        PostComment(classRoomName, repoName, commentBody)
     }
 
     render() {
@@ -24,8 +35,10 @@ class FeedbackInfoPanel extends React.Component {
                         </Paper>
                     </Box>
                     <Box display={{display:'flex', justifyContent:"space-evenly"}}>
-                        <Button variant="contained" endIcon={<GitHubIcon />} >Add To Github</Button>
-                        <Button variant="contained" endIcon={<ContentPasteIcon />}>Copy To Clipboard</Button>
+                        <Button variant="contained" endIcon={<GitHubIcon />} onClick={this.handleClick} >Add To Github</Button>
+                        <CopyToClipboard text={this.props.currentFeedback.long_desc}>
+                            <Button variant="contained" endIcon={<ContentPasteIcon />}>Copy To Clipboard</Button>
+                        </CopyToClipboard>
                     </Box>
                 </Box>
             </React.Fragment>
