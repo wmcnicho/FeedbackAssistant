@@ -15,6 +15,7 @@ import AddIcon from '@mui/icons-material/Add';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import FeedbackModal from './FeedbackModal';
+import AssignmentModal from './AssignmentModal'
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -30,15 +31,24 @@ class FeedbackNav extends React.Component {
         super(props); 
         this.state = {
           showModal: false,
+          showAssignmentModal: false,
+          gitClassroomInfo: {"Classroom" : "", "Assignment": ""},
           feedback: []
         }
-        this.handleClick = this.handleClick.bind(this);
+        this.handleFeedbackModal = this.handleFeedbackModal.bind(this);
         this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this)
+        this.handleAssignmentModal = this.handleAssignmentModal.bind(this)
+        this.handleAssignmentUpdate = this.handleAssignmentUpdate.bind(this)
     }
-    handleClick() {
-      console.log("SHOW!")
+    handleFeedbackModal() {
       let newState = this.state
       newState.showModal = true
+      this.setState(newState)
+    }
+
+    handleAssignmentModal() {
+      let newState = this.state
+      newState.showAssignmentModal = true
       this.setState(newState)
     }
 
@@ -50,6 +60,14 @@ class FeedbackNav extends React.Component {
       console.log(newState.feedback)
       this.setState(newState)
     }
+
+    handleAssignmentUpdate(gitClassroomInfo, showAssignmentModal) {
+      let newState = this.state;
+      newState.gitClassroomInfo = gitClassroomInfo;
+      newState.showAssignmentModal = showAssignmentModal;
+      console.log(newState.gitClassroomInfo)
+      this.setState(newState)      
+    }
     
     render() {
             return (
@@ -60,6 +78,14 @@ class FeedbackNav extends React.Component {
                 showModal={this.state.showModal}
                 feedbackHandler={this.handleFeedbackUpdate}              
               /> : null}
+              {this.state.showAssignmentModal? 
+
+              <AssignmentModal 
+              gitClassroomInfo={this.state.gitClassroomInfo}
+                showAssignmentModal={this.state.showAssignmentModal}
+                assignmentHandler={this.handleAssignmentUpdate}              
+              /> : null}
+
                 <Box display={{display:'flex', flexDirection:'column', height:"100vh"}}>
                   <Box sx={{flexGrow:1}}>
                     <nav aria-label="main mailbox folders">
@@ -95,12 +121,12 @@ class FeedbackNav extends React.Component {
                   <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                     <Toolbar>
                       <Tooltip title="Select GitHub Classroom">
-                        <IconButton color="inherit">
+                        <IconButton color="inherit" onClick={this.handleAssignmentModal}>
                           <GitHubIcon />
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Add More Feedback" placement='top'>
-                        <StyledFab color="secondary" aria-label="add" onClick={this.handleClick}>
+                        <StyledFab color="secondary" aria-label="add" onClick={this.handleFeedbackModal}>
                           <AddIcon />
                         </StyledFab>
                       </Tooltip>
