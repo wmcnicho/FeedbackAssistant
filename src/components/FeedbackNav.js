@@ -69,6 +69,7 @@ class FeedbackNav extends React.Component {
       // console.log("SHOW MODAL?: ", showModal)
       console.log(newState.feedbacks)
       this.setState(newState)
+      this.props.feedbackHandler(newState.feedbacks); 
     }
 
     handleAssignmentUpdate(gitClassroomInfo, showAssignmentModal) {

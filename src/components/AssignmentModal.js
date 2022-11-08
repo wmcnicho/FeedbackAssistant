@@ -67,7 +67,7 @@ class AssignmentModal extends Component {
         let newState = this.state;
         newState.showAssignmentModal = false;
         this.setState(newState)
-        this.props.feedbackHandler(newState.feedback, newState.showAssignmentModal)
+        this.props.assignmentHandler(newState.feedback, newState.showAssignmentModal)
     }
 
     render() {

@@ -60,6 +60,7 @@ class AppContainer extends React.Component {
                 feedbacks: this.data.feedback_items,
         }
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
+        this.handleFeedbackItem = this.handleFeedbackItem.bind(this);
     }
 
     handleSelectedItemChange(value) {
@@ -68,12 +69,22 @@ class AppContainer extends React.Component {
         this.setState(newState);
     }
 
+    handleFeedbackItem(value) {
+        let newState = this.state;
+        newState.feedbacks = value;
+        this.setState(newState);        
+    }
+    
     render() {
         return (
             <Box>
                 <Grid container sx={{height:'100vh'}}>
                 <Grid xs={4}>
-                    <FeedbackNav feedbacks={this.state.feedbacks} selected={this.selectedFeedbackId} handler={this.handleSelectedItemChange}/>
+                    <FeedbackNav 
+                        feedbacks={this.state.feedbacks} 
+                        selected={this.selectedFeedbackId} 
+                        handler={this.handleSelectedItemChange}
+                        feedbackHandler={this.handleFeedbackItem}/>
                 </Grid>
                 <Grid xs={8} sx={{background:"#eeeeee", height:"100vh"}}>
                     <Box>
