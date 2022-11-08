@@ -33,11 +33,10 @@ class FeedbackNav extends React.Component {
     }
 
     handleListItemClick(event, index) {
-      console.log("Handling click")
       let newState = this.state;
       newState.selected = index;
       this.setState(newState);
-      this.props.handler(index)
+      this.props.handler(index);
     }
 
     render() {
