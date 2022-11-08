@@ -8,8 +8,8 @@ class FeedbackNavItem extends React.Component {
 
     render() {
         return(
-                <ListItem disablePadding>
-                    <ListItemButton>
+                <ListItem key={this.props.id} disablePadding>
+                    <ListItemButton selected={this.props.selected} onClick={this.props.onClick} >
                         <ListItemText primary={this.props.title} />
                     </ListItemButton>
                 </ListItem>

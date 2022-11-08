@@ -56,8 +56,17 @@ class AppContainer extends React.Component {
         this.data = mockData;
         this.state = {
                 currentStudentHandle: "github1",
-                selectedFeedbackId: 1
+                selectedFeedbackId: 1,
+                currentFeedbackItem: this.data.feedback_items["1"]
         }
+        this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
+    }
+
+    handleSelectedItemChange(value) {
+        let newState = this.state;
+        newState["selectedFeedbackId"] = value;
+        newState["currentFeedbackItem"] = this.data.feedback_items[value.toString()];
+        this.setState(newState);
     }
 
     render() {
@@ -65,12 +74,12 @@ class AppContainer extends React.Component {
             <Box>
                 <Grid container sx={{height:'100vh'}}>
                 <Grid xs={4}>
-                    <FeedbackNav feedback={this.data.feedback_items}/>
+                    <FeedbackNav feedback={this.data.feedback_items} selected={this.selectedFeedbackId} handler={this.handleSelectedItemChange}/>
                 </Grid>
                 <Grid xs={8} sx={{background:"#eeeeee", height:"100vh"}}>
                     <Box>
                     <StudentNavigation students={this.data.students} currentStudent={this.state.currentStudentHandle}/>
-                    <FeedbackInfoPanel currentFeedback={this.data.feedback_items[this.state.selectedFeedbackId]}/>
+                    <FeedbackInfoPanel currentFeedback={this.state.currentFeedbackItem}/>
                     </Box>
                 </Grid>
                 </Grid>

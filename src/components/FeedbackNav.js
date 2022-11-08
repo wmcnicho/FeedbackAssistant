@@ -27,8 +27,17 @@ const StyledFab = styled(Fab)({
 
 class FeedbackNav extends React.Component {
     constructor(props) {
-        super(props); 
+        super(props);
+        this.state = {"selected": parseInt(this.props.selected)} 
         this.feedback = this.props.feedback;
+    }
+
+    handleListItemClick(event, index) {
+      console.log("Handling click")
+      let newState = this.state;
+      newState.selected = index;
+      this.setState(newState);
+      this.props.handler(index)
     }
 
     render() {
@@ -53,7 +62,11 @@ class FeedbackNav extends React.Component {
                     <nav aria-label="secondary mailbox folders">
                       <List>
                          {Object.keys(this.feedback).map(fb => (
-                          <FeedbackNavItem key={fb.title} title={this.feedback[fb].title}/>
+                          <FeedbackNavItem 
+                                id={this.feedback[fb].title}
+                                selected={parseInt(fb) === this.state.selected}
+                                onClick={(event) => this.handleListItemClick(event, parseInt(fb))}
+                                title={this.feedback[fb].title}/>
                          ))}
                       </List>
                     </nav>
