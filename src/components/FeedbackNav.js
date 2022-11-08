@@ -14,7 +14,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import FeedbackNavItem from './FeedbackNavItem';
+import FeedbackModal from './FeedbackModal';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -27,20 +27,36 @@ const StyledFab = styled(Fab)({
 
 class FeedbackNav extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {"selected": parseInt(this.props.selected)} 
-        this.feedback = this.props.feedback;
+        super(props); 
+        this.state = {
+          showModal: false,
+          feedback: []
+        }
+        this.handleClick = this.handleClick.bind(this);
+        this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this)
+    }
+    handleClick() {
+      let newState = this.state
+      newState.showModal = true
+      this.setState(newState)
     }
 
-    handleListItemClick(event, index) {
+    handleFeedbackUpdate(feedback) {
       let newState = this.state;
-      newState.selected = index;
-      this.setState(newState);
-      this.props.handler(index);
+      newState.feedback = feedback;
+      newState.showModal = false;
+      this.setState(newState)
     }
-
+    
     render() {
             return (
+              <>
+              {this.state.showModal? 
+              <FeedbackModal 
+                feedback={this.state.feedback}
+                showModal={this.state.showModal}
+                feedbackHandler={this.handleFeedbackUpdate}              
+              /> : null}
                 <Box display={{display:'flex', flexDirection:'column', height:"100vh"}}>
                   <Box sx={{flexGrow:1}}>
                     <nav aria-label="main mailbox folders">
@@ -56,17 +72,20 @@ class FeedbackNav extends React.Component {
                           </Box>
                         </ListItem>
                       </List>
-                    </nav> 
+                    </nav>
                     <Divider />
                     <nav aria-label="secondary mailbox folders">
                       <List>
-                         {Object.keys(this.feedback).map(fb => (
-                          <FeedbackNavItem 
-                                id={this.feedback[fb].title}
-                                selected={parseInt(fb) === this.state.selected}
-                                onClick={(event) => this.handleListItemClick(event, parseInt(fb))}
-                                title={this.feedback[fb].title}/>
-                         ))}
+                        <ListItem disablePadding>
+                          <ListItemButton>
+                            <ListItemText primary="Feedback Item 1" />
+                          </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                          <ListItemButton component="a" href="#simple-list">
+                            <ListItemText primary="Feedback Item 2" />
+                          </ListItemButton>
+                        </ListItem>
                       </List>
                     </nav>
                   </Box>
@@ -78,7 +97,7 @@ class FeedbackNav extends React.Component {
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Add More Feedback" placement='top'>
-                        <StyledFab color="secondary" aria-label="add">
+                        <StyledFab color="secondary" aria-label="add" onClick={this.handleClick}>
                           <AddIcon />
                         </StyledFab>
                       </Tooltip>
@@ -91,6 +110,8 @@ class FeedbackNav extends React.Component {
                     </Toolbar>
                   </AppBar>
                 </Box>
+              </>
+
         )
     }
 }
