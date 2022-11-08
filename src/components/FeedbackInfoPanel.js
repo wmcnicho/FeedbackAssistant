@@ -8,15 +8,16 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 class FeedbackInfoPanel extends React.Component {
     constructor(props) {
         super(props);
+        // this.handleClick = this.handleClick.bind(this);
     }
-    handleClick() {
+    handleClick(long_feedback) {
         const classRoomName = "feedbackassistant"
         const assignmentName = "test-token"
         const studentGithubId = "JAEWOOKe"
         const commentBody = "THE GRADE MASTER 9000 IS HERE."
         const repoName = `${assignmentName}-${studentGithubId}`
-        console.log(classRoomName, repoName, commentBody)
-        PostComment(classRoomName, repoName, commentBody)
+        // console.log(classRoomName, repoName, commentBody)
+        PostComment(classRoomName, repoName, long_feedback);
     }
 
     render() {
@@ -35,7 +36,7 @@ class FeedbackInfoPanel extends React.Component {
                         </Paper>
                     </Box>
                     <Box display={{display:'flex', justifyContent:"space-evenly"}}>
-                        <Button variant="contained" endIcon={<GitHubIcon />} onClick={this.handleClick} >Add To Github</Button>
+                        <Button variant="contained" endIcon={<GitHubIcon />} onClick={() => this.handleClick(this.props.currentFeedback.long_desc)} >Add To Github</Button>
                         <CopyToClipboard text={this.props.currentFeedback.long_desc}>
                             <Button variant="contained" endIcon={<ContentPasteIcon />}>Copy To Clipboard</Button>
                         </CopyToClipboard>
