@@ -8,17 +8,13 @@ class GitHubButton extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
     
-
     handleClick() {
-        // This is where I call your code
-        console.log("Clicked.")
         const classRoomName = "feedbackassistant"
         const assignmentName = "test-token"
         const studentGithubId = "JAEWOOKe"
         const commentBody = "Moved api key to app!"
         const repoName = `${assignmentName}-${studentGithubId}`
         PostComment(classRoomName, repoName, commentBody)
-        
     }
 
     render() {

@@ -24,10 +24,10 @@ class ModalButtion extends Component {
         super(props); 
         this.state = {
             open: false,
-            score: 0,
-            feedback_body: "",
-            feedback_abstract: "",
             title: "",
+            score: 0,
+            short_desc: "",
+            long_desc: "",
             feedback: this.props.feedback
         }
         this.handleOpen = this.handleOpen.bind(this);
@@ -44,35 +44,30 @@ class ModalButtion extends Component {
         }
         let newState = this.state;
         newState.score = newScore;
-        console.log("New score: ", newScore)
         this.setState(newState)
     }
 
-    handleFeedbackAbstractChange(event, newFeedbackAbstract) {
-        console.log("New feedback: ", newFeedbackAbstract)
+    handleShortDescChange(event, newShortDesc) {
         let newState = this.state;
-        newState.feedback_abstract = newFeedbackAbstract;
+        newState.short_desc = newShortDesc;
         this.setState(newState)
     }
 
-    handleFeedbackBodyChange(event, newFeedbackBody) {
-        console.log("New feedback: ", newFeedbackBody)
+    handleLongDescChange(event, newLongDesc) {
         let newState = this.state;
-        newState.feedback_body = newFeedbackBody;
+        newState.long_desc = newLongDesc;
         this.setState(newState)
     }
 
     handleTitleChange(event, newTitle) {
-        console.log("New title: ", newTitle)
         let newState = this.state;
         newState.title = newTitle;
         this.setState(newState)
     }
 
     handleSubmit() {
-        console.log("Submit")
         let newState = this.state;
-        const feedback = [{"title": this.state.title}, {"score": this.state.score}, {"feedback_abstract": this.state.feedback_abstract}, {"feedback_body": this.state.feedback_body}]
+        const feedback = [{"title": this.state.title}, {"score": this.state.score}, {"short_desc": this.state.short_desc}, {"long_desc": this.state.short_des}]
         console.log(feedback)
         newState.open = false;
         newState.feedback = feedback
@@ -130,16 +125,16 @@ class ModalButtion extends Component {
                         <TextField 
                             id="standard-basic" 
                             label="Abstract" variant="standard" 
-                            value={this.state.feedback_abstract}
-                            onChange={(event) => this.handleFeedbackAbstractChange(event, event.target.value)}
+                            value={this.state.short_desc}
+                            onChange={(event) => this.handleShortDescChange(event, event.target.value)}
                         />
                         <TextField
                             id="standard-multiline-static"
                             label="Feedback"
                             multiline
                             maxRows={4}
-                            value={this.state.feedback_body}
-                            onChange={(event) => this.handleFeedbackBodyChange(event, event.target.value)}
+                            value={this.state.long_desc}
+                            onChange={(event) => this.handleLongDescChange(event, event.target.value)}
                             variant="standard"
                         />
                         <Button onClick={this.handleSubmit} variant="contained">Submit</Button>

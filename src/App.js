@@ -9,22 +9,6 @@ export const octokit = new Octokit({
     auth: apiKey,
   });
 
-// handleBoolFlagUpdate(boolFlag) {
-//   let newState = this.state;
-//   newState.boolFlag = boolFlag;
-//   console.log(boolFlag)
-//   this.setState(newState)
-// }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <GitHubButton/>
-//       <ModalButtion/>
-//     </div>
-//   );
-// }
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -36,7 +20,6 @@ class App extends Component {
   handleFeedbackUpdate(feedback) {
     let newState = this.state;
     newState.feedback = feedback;
-    console.log(feedback)
     this.setState(newState)
 }
 
