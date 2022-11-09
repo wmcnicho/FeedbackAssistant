@@ -16,7 +16,7 @@ class StudentNavigation extends React.Component {
                 <Grid container sx={{display:"block", background:"white"}}>
                     <Grid>
                         <Grid sx={{display:"flex", justifyContent:"space-between"}}>
-                            <Tooltip title="Previous Submission">
+                            <Tooltip title="Previous Submission" onClick={() => this.props.changeStudentHandler(false)}>
                                 <Button variant="contained" color="primary">
                                     <ArrowLeftIcon fontSize='large' />
                                 </Button>
@@ -30,7 +30,7 @@ class StudentNavigation extends React.Component {
                                     </Typography>
                                 </Tooltip>
                             </Button>
-                            <Tooltip title="Next Submission" placement='bottom'>
+                            <Tooltip title="Next Submission" onClick={() => this.props.changeStudentHandler(true)} placement='bottom'>
                                 <Button variant="contained" color="primary">
                                     <ArrowRightIcon fontSize='large' />
                                 </Button>
