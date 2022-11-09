@@ -1,6 +1,6 @@
 const path = require('path');
 const { fetchRepos, fetchGithubUrls } = require("./utils/utils.js");
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const isDev = require('electron-is-dev');
 
 async function handleChooseDirectory() {
@@ -40,6 +40,12 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../build/index.html')}`
   );
+
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return { action: 'deny' };
+  });
+
   // Open the DevTools.
   if (isDev) {
     win.webContents.openDevTools({ mode: 'detach' });
