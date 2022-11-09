@@ -27,27 +27,20 @@ const mockData = {
             "long_desc": "Everything is perfect!"
         }
     ],
-    "students": {
-        "github1": {
+    "students": [
+        {
+            "github": "github1",
             "url": "https://www.github.com/classroom1/repo-for-github1",
-            "selected_items": [
-                1
-            ]
         },
-        "github2": {
+        {
+            "github": "github2",
             "url": "https://www.github.com/classroom1/repo-for-github2",
-            "selected_items": [
-                2
-            ]
         },
-        "github3": {
+        {
+            "github": "github3",
             "url": "https://www.github.com/classroom1/repo-for-github3",
-            "selected_items": [
-                1,
-                2
-            ]
-        }
-    }
+        },
+    ],
 }
 
 class AppContainer extends React.Component {
@@ -55,12 +48,15 @@ class AppContainer extends React.Component {
         super(props); 
         this.data = mockData;
         this.state = {
-                currentStudentHandle: "github1",
-                selectedFeedbackId: 0,
                 feedbacks: this.data.feedback_items,
+                selectedFeedbackId: 0,
+                students: [],
+                currentStudentIndex: 0,
+                directory: "",
         }
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
         this.handleFeedbackItem = this.handleFeedbackItem.bind(this);
+        this.handleChooseDirectory = this.handleChooseDirectory.bind(this);
     }
 
     handleSelectedItemChange(value) {
@@ -74,6 +70,14 @@ class AppContainer extends React.Component {
         newState.feedbacks = value;
         this.setState(newState);        
     }
+
+    handleChooseDirectory(path, students) {
+        this.setState({
+            directory: path,
+            students: students,
+            currentStudentIndex: 0,
+        });
+    }
     
     render() {
         return (
@@ -84,11 +88,12 @@ class AppContainer extends React.Component {
                         feedbacks={this.state.feedbacks} 
                         selected={this.selectedFeedbackId} 
                         handler={this.handleSelectedItemChange}
-                        feedbackHandler={this.handleFeedbackItem}/>
+                        feedbackHandler={this.handleFeedbackItem}
+                        chooseDirectoryHandler={this.handleChooseDirectory}/>
                 </Grid>
                 <Grid xs={8} sx={{background:"#eeeeee", height:"100vh"}}>
                     <Box>
-                    <StudentNavigation students={this.data.students} currentStudent={this.state.currentStudentHandle}/>
+                    <StudentNavigation student={this.state.students.length > 0 ? this.state.students[this.state.currentStudentIndex] : {}}/>
                     <FeedbackInfoPanel currentFeedback={this.state.feedbacks[this.state.selectedFeedbackId]}/>
                     </Box>
                 </Grid>

@@ -1,14 +1,24 @@
 const path = require('path');
-const { fetchRepos } = require("./utils/utils.js");
+const { fetchRepos, fetchGithubUrls } = require("./utils/utils.js");
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const isDev = require('electron-is-dev');
 
-async function handleFileOpen() {
-  const { canceled, filePaths } = await dialog.showOpenDialog()
+async function handleChooseDirectory() {
+  const { canceled, filePaths } = await dialog.showOpenDialog({properties: ['openDirectory']})
   if (canceled) {
     return;
   } else {
-    return filePaths[0]
+    const path = filePaths[0];
+    const repos = await fetchRepos(path);
+    const githubUrls = await fetchGithubUrls(repos, path);
+    const students = repos.map((repo, index) => {
+      return {
+        github: repo,
+        url: githubUrls[index],
+      }
+    });
+
+    return {path, students};
   }
 }
 
@@ -40,7 +50,7 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  ipcMain.handle('dialog:openFile', handleFileOpen);
+  ipcMain.handle('dialog:chooseDirectory', handleChooseDirectory);
   createWindow();
 });
 

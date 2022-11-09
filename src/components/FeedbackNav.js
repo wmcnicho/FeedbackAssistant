@@ -38,9 +38,10 @@ class FeedbackNav extends React.Component {
           selected: this.props.selected
         }
         this.handleFeedbackModal = this.handleFeedbackModal.bind(this);
-        this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this)
-        this.handleAssignmentModal = this.handleAssignmentModal.bind(this)
-        this.handleAssignmentUpdate = this.handleAssignmentUpdate.bind(this)
+        this.handleFeedbackUpdate = this.handleFeedbackUpdate.bind(this);
+        this.handleAssignmentModal = this.handleAssignmentModal.bind(this);
+        this.handleAssignmentUpdate = this.handleAssignmentUpdate.bind(this);
+        this.handleChooseDirectory = this.handleChooseDirectory.bind(this);
     }
 
     handleListItemClick(event, index) {
@@ -78,6 +79,15 @@ class FeedbackNav extends React.Component {
       newState.showAssignmentModal = showAssignmentModal;
       console.log(newState.gitClassroomInfo)
       this.setState(newState)      
+    }
+
+    async handleChooseDirectory(path, students) {
+      const result = await window.backend.chooseDirectory();
+      console.log(result);
+      if (result !== undefined) {
+        const { path, students } = result;
+        this.props.chooseDirectoryHandler(path, students);
+      }
     }
     
     render() {
@@ -117,11 +127,12 @@ class FeedbackNav extends React.Component {
                     <nav aria-label="secondary mailbox folders">
                       <List>
                         {this.state.feedbacks.map((fb, index) => (
-                            <FeedbackNavItem 
-                                  id={fb.title}
-                                  selected={fb === this.state.selected}
-                                  onClick={(event) => this.handleListItemClick(event, index)}
-                                  title={fb.title}/>
+                            <FeedbackNavItem
+                              key={index}
+                              id={fb.title}
+                              selected={fb === this.state.selected}
+                              onClick={(event) => this.handleListItemClick(event, index)}
+                              title={fb.title}/>
                           ))}
                       </List>
                     </nav>
@@ -139,7 +150,7 @@ class FeedbackNav extends React.Component {
                         </StyledFab>
                       </Tooltip>
                       <Box sx={{ flexGrow: 1 }} />
-                      <Tooltip title="Select Grading Directoy">
+                      <Tooltip title="Select Grading Directoy" onClick={this.handleChooseDirectory}>
                         <IconButton color="inherit">
                           <FolderOpenIcon />
                         </IconButton>
