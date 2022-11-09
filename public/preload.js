@@ -9,6 +9,6 @@ const { contextBridge, ipcRenderer  } = require("electron");
 process.once("loaded", () => {
   contextBridge.exposeInMainWorld("versions", process.versions);
   contextBridge.exposeInMainWorld("backend", {
-    openFile: () => ipcRenderer.invoke('dialog:openFile'),
+    chooseDirectory: () => ipcRenderer.invoke('dialog:chooseDirectory'),
   });
 });
