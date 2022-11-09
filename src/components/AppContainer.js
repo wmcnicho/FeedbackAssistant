@@ -57,6 +57,7 @@ class AppContainer extends React.Component {
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
         this.handleFeedbackItem = this.handleFeedbackItem.bind(this);
         this.handleChooseDirectory = this.handleChooseDirectory.bind(this);
+        this.handleChangeStudent = this.handleChangeStudent.bind(this);
     }
 
     handleSelectedItemChange(value) {
@@ -78,6 +79,23 @@ class AppContainer extends React.Component {
             currentStudentIndex: 0,
         });
     }
+
+    handleChangeStudent(isNext) {
+        const len = this.state.students.length;
+        if (len === 0) {
+            return;
+        }
+
+        if (isNext) {
+            this.setState((prevState) => ({
+                currentStudentIndex: Math.min(len - 1, prevState.currentStudentIndex + 1),
+            }));
+        } else {
+            this.setState((prevState) => ({
+                currentStudentIndex: Math.max(0, prevState.currentStudentIndex - 1),
+            }));
+        }
+    }
     
     render() {
         return (
@@ -93,7 +111,10 @@ class AppContainer extends React.Component {
                 </Grid>
                 <Grid xs={8} sx={{background:"#eeeeee", height:"100vh"}}>
                     <Box>
-                    <StudentNavigation student={this.state.students.length > 0 ? this.state.students[this.state.currentStudentIndex] : {}}/>
+                    <StudentNavigation
+                        student={this.state.students.length > 0 ? this.state.students[this.state.currentStudentIndex] : {}}
+                        changeStudentHandler={this.handleChangeStudent}
+                        />
                     <FeedbackInfoPanel currentFeedback={this.state.feedbacks[this.state.selectedFeedbackId]}/>
                     </Box>
                 </Grid>
