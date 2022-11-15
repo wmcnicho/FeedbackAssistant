@@ -53,7 +53,6 @@ class AppContainer extends React.Component {
                 students: [],
                 currentStudentIndex: 0,
                 directory: "",
-                apiKey: "",
                 gitClassroomInfo: {"Classroom" : "", "Assignment": "", "ApiKey": ""}
         }
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);

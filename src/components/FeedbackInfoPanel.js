@@ -8,7 +8,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 class FeedbackInfoPanel extends React.Component {
     constructor(props) {
         super(props);
-        // this.handleClick = this.handleClick.bind(this);
     }
     handleClick(long_feedback) {
         const classRoomName = this.props.gitClassroomInfo["Classroom"]
@@ -17,15 +16,6 @@ class FeedbackInfoPanel extends React.Component {
         const repoName = `${assignmentName}-${studentGithubId}`
         const apiKey = this.props.gitClassroomInfo["ApiKey"]
 
-        console.log(this.props.student)
-        // const classRoomName = "feedbackassistant"
-        // const assignmentName = "test-token"
-        // const studentGithubId = "JAEWOOKe"
-        // console.log(this.props.student)
-        // const repoName = `${assignmentName}-${studentGithubId}`
-        // const apiKey = this.props.gitClassroomInfo["ApiKey"]
-
-        // console.log(classRoomName, repoName, commentBody)
         PostComment(classRoomName, repoName, long_feedback, apiKey);
     }
 
