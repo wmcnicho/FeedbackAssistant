@@ -11,11 +11,19 @@ class FeedbackInfoPanel extends React.Component {
         // this.handleClick = this.handleClick.bind(this);
     }
     handleClick(long_feedback) {
-        const classRoomName = "feedbackassistant"
-        const assignmentName = "test-token"
-        const studentGithubId = "JAEWOOKe"
+        const classRoomName = this.props.gitClassroomInfo["Classroom"]
+        const assignmentName = this.props.gitClassroomInfo["Assignment"]
+        const studentGithubId = this.props.student["github"]
         const repoName = `${assignmentName}-${studentGithubId}`
         const apiKey = this.props.gitClassroomInfo["ApiKey"]
+
+        console.log(this.props.student)
+        // const classRoomName = "feedbackassistant"
+        // const assignmentName = "test-token"
+        // const studentGithubId = "JAEWOOKe"
+        // console.log(this.props.student)
+        // const repoName = `${assignmentName}-${studentGithubId}`
+        // const apiKey = this.props.gitClassroomInfo["ApiKey"]
 
         // console.log(classRoomName, repoName, commentBody)
         PostComment(classRoomName, repoName, long_feedback, apiKey);
