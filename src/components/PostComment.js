@@ -1,5 +1,3 @@
-// import { octokit } from "../App";
-
 export default function PostComment(classRoomName, repoName, commentBody, apiKey) {
 
     const { Octokit } = require("@octokit/rest");
