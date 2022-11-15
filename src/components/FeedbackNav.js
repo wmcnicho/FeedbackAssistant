@@ -33,7 +33,7 @@ class FeedbackNav extends React.Component {
         this.state = {
           showModal: false,
           showAssignmentModal: false,
-          gitClassroomInfo: {"Classroom" : "", "Assignment": ""},
+          gitClassroomInfo: {"Classroom" : "", "Assignment": "", "ApiKey": ""},
           feedbacks: this.props.feedbacks,
           selected: this.props.selected
         }
@@ -67,7 +67,6 @@ class FeedbackNav extends React.Component {
       let newState = this.state;
       newState.feedbacks = feedbacks;
       newState.showModal = showModal;
-      // console.log("SHOW MODAL?: ", showModal)
       console.log(newState.feedbacks)
       this.setState(newState)
       this.props.feedbackHandler(newState.feedbacks); 
@@ -78,7 +77,8 @@ class FeedbackNav extends React.Component {
       newState.gitClassroomInfo = gitClassroomInfo;
       newState.showAssignmentModal = showAssignmentModal;
       console.log(newState.gitClassroomInfo)
-      this.setState(newState)      
+      this.setState(newState)
+      this.props.classroomHandler(newState.gitClassroomInfo)
     }
 
     async handleChooseDirectory(path, students) {
@@ -102,9 +102,9 @@ class FeedbackNav extends React.Component {
               {this.state.showAssignmentModal? 
 
               <AssignmentModal 
-              gitClassroomInfo={this.state.gitClassroomInfo}
+                gitClassroomInfo={this.state.gitClassroomInfo}
                 showAssignmentModal={this.state.showAssignmentModal}
-                assignmentHandler={this.handleAssignmentUpdate}              
+                assignmentHandler={this.handleAssignmentUpdate}
               /> : null}
 
                 <Box display={{display:'flex', flexDirection:'column', height:"100vh"}}>

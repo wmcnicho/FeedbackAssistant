@@ -30,7 +30,8 @@ class AssignmentModal extends Component {
             showAssignmentModal: this.props.showAssignmentModal,
             gitClassroomInfo: this.props.gitClassroomInfo,
             classRoomName: "",
-            assignmentName: ""
+            assignmentName: "",
+            apiKey: ""
         }
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -50,11 +51,18 @@ class AssignmentModal extends Component {
         this.setState(newState)
     }
 
+    handleApiKeyChange(event, newApiKey) {
+        let newState = this.state;
+        newState.apiKey = newApiKey;
+        this.setState(newState)
+    }
+
     handleSubmit() {
         let newState = this.state;
         newState.showAssignmentModal = false;
         newState.gitClassroomInfo["Classroom"] = this.state.classRoomName
         newState.gitClassroomInfo["Assignment"] = this.state.assignmentName
+        newState.gitClassroomInfo["ApiKey"] = this.state.apiKey
         this.props.assignmentHandler(newState.gitClassroomInfo, newState.showAssignmentModal)
     }
 
@@ -63,6 +71,7 @@ class AssignmentModal extends Component {
         newState.showAssignmentModal = true;
         this.setState(newState)
     }
+
     handleClose() {
         let newState = this.state;
         newState.showAssignmentModal = false;
@@ -92,7 +101,13 @@ class AssignmentModal extends Component {
                         label="Assignment" variant="standard" 
                         value={this.state.assignmentName}
                         onChange={(event) => this.handleAssignmentChange(event, event.target.value)}
-                    />                 
+                    />        
+                     <TextField 
+                        id="standard-basic" 
+                        label="API KEY" variant="standard" 
+                        value={this.state.apiKey}
+                        onChange={(event) => this.handleApiKeyChange(event, event.target.value)}
+                    />            
                         <Button onClick={this.handleSubmit} variant="contained">Submit</Button>
                         </Stack>
                     </Box>

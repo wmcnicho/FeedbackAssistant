@@ -53,11 +53,14 @@ class AppContainer extends React.Component {
                 students: [],
                 currentStudentIndex: 0,
                 directory: "",
+                apiKey: "",
+                gitClassroomInfo: {"Classroom" : "", "Assignment": "", "ApiKey": ""}
         }
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
         this.handleFeedbackItem = this.handleFeedbackItem.bind(this);
         this.handleChooseDirectory = this.handleChooseDirectory.bind(this);
         this.handleChangeStudent = this.handleChangeStudent.bind(this);
+        this.handleClassroom = this.handleClassroom.bind(this)
     }
 
     handleSelectedItemChange(value) {
@@ -69,6 +72,12 @@ class AppContainer extends React.Component {
     handleFeedbackItem(value) {
         let newState = this.state;
         newState.feedbacks = value;
+        this.setState(newState);        
+    }
+
+    handleClassroom(value) {
+        let newState = this.state;
+        newState.gitClassroomInfo = value;
         this.setState(newState);        
     }
 
@@ -107,6 +116,7 @@ class AppContainer extends React.Component {
                         selected={this.selectedFeedbackId} 
                         handler={this.handleSelectedItemChange}
                         feedbackHandler={this.handleFeedbackItem}
+                        classroomHandler={this.handleClassroom}
                         chooseDirectoryHandler={this.handleChooseDirectory}/>
                 </Grid>
                 <Grid xs={8} sx={{background:"#eeeeee", height:"100vh"}}>
@@ -115,7 +125,9 @@ class AppContainer extends React.Component {
                         student={this.state.students.length > 0 ? this.state.students[this.state.currentStudentIndex] : {}}
                         changeStudentHandler={this.handleChangeStudent}
                         />
-                    <FeedbackInfoPanel currentFeedback={this.state.feedbacks[this.state.selectedFeedbackId]}/>
+                    <FeedbackInfoPanel 
+                        currentFeedback={this.state.feedbacks[this.state.selectedFeedbackId]}
+                        gitClassroomInfo={this.state.gitClassroomInfo}/>
                     </Box>
                 </Grid>
                 </Grid>
