@@ -127,7 +127,8 @@ class AppContainer extends React.Component {
                         />
                     <FeedbackInfoPanel 
                         currentFeedback={this.state.feedbacks[this.state.selectedFeedbackId]}
-                        gitClassroomInfo={this.state.gitClassroomInfo}/>
+                        gitClassroomInfo={this.state.gitClassroomInfo}
+                        student={this.state.students.length > 0 ? this.state.students[this.state.currentStudentIndex] : {}}/>
                     </Box>
                 </Grid>
                 </Grid>
