@@ -1,7 +1,12 @@
-import { octokit } from "../App";
+// import { octokit } from "../App";
 
-export default function PostComment(classRoomName, repoName, commentBody) {
-   
+export default function PostComment(classRoomName, repoName, commentBody, apiKey) {
+
+    const { Octokit } = require("@octokit/rest");
+    const octokit = new Octokit({ 
+        auth: apiKey,
+    });
+    
     const {data: user} = octokit.request('Get /user')
 
     const owner = classRoomName

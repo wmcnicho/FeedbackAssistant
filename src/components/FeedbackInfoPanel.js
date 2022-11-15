@@ -14,10 +14,11 @@ class FeedbackInfoPanel extends React.Component {
         const classRoomName = "feedbackassistant"
         const assignmentName = "test-token"
         const studentGithubId = "JAEWOOKe"
-        const commentBody = "THE GRADE MASTER 9000 IS HERE."
         const repoName = `${assignmentName}-${studentGithubId}`
+        const apiKey = this.props.gitClassroomInfo["ApiKey"]
+
         // console.log(classRoomName, repoName, commentBody)
-        PostComment(classRoomName, repoName, long_feedback);
+        PostComment(classRoomName, repoName, long_feedback, apiKey);
     }
 
     render() {
