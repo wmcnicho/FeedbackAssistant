@@ -1,5 +1,5 @@
 export default function PostComment(classRoomName, repoName, commentBody, apiKey) {
-
+    console.log(`${classRoomName} ${repoName} ${commentBody}`)
     const { Octokit } = require("@octokit/rest");
     const octokit = new Octokit({ 
         auth: apiKey,

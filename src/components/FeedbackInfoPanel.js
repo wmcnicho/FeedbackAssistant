@@ -9,14 +9,16 @@ class FeedbackInfoPanel extends React.Component {
     constructor(props) {
         super(props);
     }
-    handleClick(long_feedback) {
+    handleClick(feedback) {
         const classRoomName = this.props.gitClassroomInfo["Classroom"]
         const assignmentName = this.props.gitClassroomInfo["Assignment"]
         const studentGithubId = this.props.student["github"]
         const repoName = `${assignmentName}-${studentGithubId}`
         const apiKey = this.props.gitClassroomInfo["ApiKey"]
 
-        PostComment(classRoomName, repoName, long_feedback, apiKey);
+        let commentBody = `### Feedback: ${feedback.title}\n **${feedback.short_desc}**\n${feedback.long_desc}\n\n*Note: This comment was posted from a UCA using the FeedBackAssistant App.*`
+        console.log(commentBody)
+        PostComment(classRoomName, repoName, commentBody, apiKey);
     }
 
     render() {
@@ -35,7 +37,7 @@ class FeedbackInfoPanel extends React.Component {
                         </Paper>
                     </Box>
                     <Box display={{display:'flex', justifyContent:"space-evenly"}}>
-                        <Button variant="contained" endIcon={<GitHubIcon />} onClick={() => this.handleClick(this.props.currentFeedback.long_desc)} >Add To Github</Button>
+                        <Button variant="contained" endIcon={<GitHubIcon />} onClick={() => this.handleClick(this.props.currentFeedback)} >Add To Github</Button>
                         <CopyToClipboard text={this.props.currentFeedback.long_desc}>
                             <Button variant="contained" endIcon={<ContentPasteIcon />}>Copy To Clipboard</Button>
                         </CopyToClipboard>
