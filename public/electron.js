@@ -1,5 +1,5 @@
 const path = require('path');
-const { fetchRepos, fetchGithubUrls } = require("./utils/utils.js");
+const { fetchRepos, fetchGithubUrls, fetchFeedbackObj } = require("./utils/utils.js");
 const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const isDev = require('electron-is-dev');
 
@@ -18,7 +18,14 @@ async function handleChooseDirectory() {
       }
     });
 
-    return {path, students};
+    let feedback;
+    try {
+      feedback = fetchFeedbackObj(path + "/feedback.json");
+    } catch (err) {
+      feedback = {};
+    }
+
+    return {path, students, feedback};
   }
 }
 

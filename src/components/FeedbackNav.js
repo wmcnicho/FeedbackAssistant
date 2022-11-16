@@ -81,12 +81,13 @@ class FeedbackNav extends React.Component {
       this.props.classroomHandler(newState.gitClassroomInfo)
     }
 
-    async handleChooseDirectory(path, students) {
+    async handleChooseDirectory() {
       const result = await window.backend.chooseDirectory();
       console.log(result);
       if (result !== undefined) {
-        const { path, students } = result;
-        this.props.chooseDirectoryHandler(path, students);
+        const { path, students, feedback } = result;
+        this.setState({feedbacks: feedback?.feedback_items ?? []});
+        this.props.chooseDirectoryHandler(path, students, feedback);
       }
     }
     
@@ -113,12 +114,12 @@ class FeedbackNav extends React.Component {
                       <List>
                         <ListItem sx={{justifyContent:'center'}}>
                           <Box>
-                            <Typography variant='h5' >Assignment 10</Typography>
+                            <Typography variant='h5' >{this.props.title}</Typography>
                           </Box>
                         </ListItem>
                         <ListItem sx={{justifyContent:'center'}}>
                           <Box>
-                            <Typography variant='h6' >Node.js Basics</Typography>
+                            <Typography variant='h6' >{this.props.subtitle}</Typography>
                           </Box>
                         </ListItem>
                       </List>

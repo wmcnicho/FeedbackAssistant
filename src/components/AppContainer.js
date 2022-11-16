@@ -5,54 +5,17 @@ import FeedbackNav from './FeedbackNav'
 import FeedbackInfoPanel from './FeedbackInfoPanel';
 import StudentNavigation from './StudentNavigation';
 
-const mockData = {
-    "title": "Assignment 1",
-    "feedback_items": [
-        {
-            "title": "Incorrect for-loop",
-            "type": "major_bug",
-            "short_desc": "For-loop is not exiting",
-            "long_desc": "Your for-loop is looping forever because the exit conditions are not met"
-        },
-        {
-            "title": "Good test",
-            "type": "positive",
-            "short_desc": "Very thorough tests!",
-            "long_desc": "Your tests have a good code coverage and hit many edge cases. Keep it up!"
-        },
-        {
-            "title": "Excellent",
-            "type": "positive",
-            "short_desc": "Excellent work!",
-            "long_desc": "Everything is perfect!"
-        }
-    ],
-    "students": [
-        {
-            "github": "github1",
-            "url": "https://www.github.com/classroom1/repo-for-github1",
-        },
-        {
-            "github": "github2",
-            "url": "https://www.github.com/classroom1/repo-for-github2",
-        },
-        {
-            "github": "github3",
-            "url": "https://www.github.com/classroom1/repo-for-github3",
-        },
-    ],
-}
-
 class AppContainer extends React.Component {
     constructor(props) {
         super(props); 
-        this.data = mockData;
         this.state = {
-                feedbacks: this.data.feedback_items,
+                feedbacks: [],
                 selectedFeedbackId: 0,
                 students: [],
                 currentStudentIndex: 0,
                 directory: "",
+                title: "",
+                subtitle: "",
                 gitClassroomInfo: {"Classroom" : "", "Assignment": "", "ApiKey": ""}
         }
         this.handleSelectedItemChange = this.handleSelectedItemChange.bind(this);
@@ -80,11 +43,15 @@ class AppContainer extends React.Component {
         this.setState(newState);        
     }
 
-    handleChooseDirectory(path, students) {
+    handleChooseDirectory(path, students, feedback) {
         this.setState({
             directory: path,
             students: students,
+            feedbacks: feedback?.feedback_items ?? [],
+            title: feedback?.title ?? "",
+            subtitle: feedback?.subtitle ?? "",
             currentStudentIndex: 0,
+            selectedFeedbackId: 0,
         });
     }
 
@@ -113,6 +80,8 @@ class AppContainer extends React.Component {
                     <FeedbackNav 
                         feedbacks={this.state.feedbacks} 
                         selected={this.selectedFeedbackId} 
+                        title={this.state.title}
+                        subtitle={this.state.subtitle}
                         handler={this.handleSelectedItemChange}
                         feedbackHandler={this.handleFeedbackItem}
                         classroomHandler={this.handleClassroom}
@@ -125,7 +94,7 @@ class AppContainer extends React.Component {
                         changeStudentHandler={this.handleChangeStudent}
                         />
                     <FeedbackInfoPanel 
-                        currentFeedback={this.state.feedbacks[this.state.selectedFeedbackId]}
+                        currentFeedback={this.state.feedbacks.length > 0 ? this.state.feedbacks[this.state.selectedFeedbackId] : {}}
                         gitClassroomInfo={this.state.gitClassroomInfo}
                         student={this.state.students.length > 0 ? this.state.students[this.state.currentStudentIndex] : {}}/>
                     </Box>
