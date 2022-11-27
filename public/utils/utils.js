@@ -38,7 +38,17 @@ async function fetchRepos(path) {
  */
 async function fetchGithubUrls(repos, path) {
     const results = await mapAsync(repos, repo => simpleGit(`${path}/${repo}`).getConfig("remote.origin.url"));
-    return results.map(res => res.value);
+    return results.map(res => {
+        let url = res.value;
+        if (url.startsWith("https://x-access-token")) {
+            url = "https://" + url.substring(url.indexOf("github.com"))
+        }
+        if (url.endsWith(".git")) {
+            url = url.substring(0, url.length - 4)
+        }
+        url += "/pull/1/files"
+        return url;
+    });
 }
 
 /**
