@@ -1,15 +1,10 @@
 import React from 'react'
 import Grid from '@mui/material/Unstable_Grid2';
-import Box from '@mui/material/Box';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { Button, Link, Tooltip, Typography } from '@mui/material';
 
 class StudentNavigation extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props.student?.url)
-    }
 
     render() {
         return(
