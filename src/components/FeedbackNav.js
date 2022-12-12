@@ -108,14 +108,14 @@ class FeedbackNav extends React.Component {
                 assignmentHandler={this.handleAssignmentUpdate}
               /> : null}
 
-                <Box display={{display:'flex', flexDirection:'column', height:"100vh"}}>
-                  <Box sx={{flexGrow:1}}>
+                <Box display={{display:'flex', flexDirection:'column', height:"100vh", maxHeight:"100vh"}}>
+                  <Box>
                     <nav aria-label="main mailbox folders">
                       <List>
                         <ListItem sx={{justifyContent:'center'}}>
                           <Box>
                             <Typography variant='h5' >{this.props.title}</Typography>
-                          </Box>
+                          </Box>  
                         </ListItem>
                         <ListItem sx={{justifyContent:'center'}}>
                           <Box>
@@ -125,19 +125,22 @@ class FeedbackNav extends React.Component {
                       </List>
                     </nav>
                     <Divider />
+                  </Box>
+                  <Box sx={{flexGrow:1, overflow:"scroll"}}>
                     <nav aria-label="secondary mailbox folders">
-                      <List>
+                      <List sx={{flexGrow:1, overflow:"scroll"}}>
                         {this.state.feedbacks.map((fb, index) => (
                             <FeedbackNavItem
                               key={index}
                               id={fb.title}
                               selected={index === this.state.selected}
                               onClick={(event) => this.handleListItemClick(event, index)}
+                              type={fb.type}
                               title={fb.title}/>
                           ))}
-                      </List>
-                    </nav>
-                  </Box>
+                        </List>
+                      </nav>
+                    </Box>
                   <AppBar position="relative" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                     <Toolbar>
                       <Tooltip title="Select GitHub Classroom">
