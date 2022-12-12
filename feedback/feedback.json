@@ -1,46 +1,46 @@
 {
-    "title": "Homework 7",
-    "subtitle": "Scrabble Server Starter",
+    "title": "Assignment 1",
+    "subtitle": "Fizzbuzz",
     "feedback_items": [
         {
-            "title": "Retrieval of top 10 can be simplified",
-            "short_desc": "Your retrieval of top 10 items can be streamlined.",
+            "title": "Efficient Solution",
+            "short_desc": "Your implementation of this problem is written very efficiently.",
             "type": "positive",
-            "long_desc": "You can just simply use .slice(0, 10) on an Array to get up to 10 items."
+            "long_desc": "This solution runs in a very efficient time complexity. This allows your code to scale well to large inputs. Great work!"
         },
         {
-            "title": "Inefficient file reading",
+            "title": "No 'Fizzbuzz' Printed",
             "short_desc": "You only need to read your data file once.",
              "type": "missing",
             "long_desc": "Once you read the file when the server first starts, you can then maintain the state in memory."
         },
         {
-            "title": "Inefficient sorting",
-            "short_desc": "Your sorting can be simplified.",
+            "title": "Very Readable",
+            "short_desc": "The style of your code is easy to read.",
             "type": "style_good",
-            "long_desc": "The easiest method is to use JavaScript's sort() function with the right comparator. Alternatively, you could use a different data structure that's more suitable for getting the top K items, or use binary search to add items."
+            "long_desc": "Great work on keeping up on proper styling. Well styled code is easier to read and makes a big difference when working on software with a group."
         },
         {
-            "title": "Persist before responding",
+            "title": "Modulo Math Error",
             "short_desc": "You should persist your data before responding.",
             "type": "minor_bug",
             "long_desc": "For this assignment, it's better practice to respond only after having written your data to storage, otherwise if the write goes wrong, the client wouldn't know."
         },
         
         {
-            "title": "Retrieval of top 10 can be simplified",
+            "title": "If-else Simplification",
             "short_desc": "Your retrieval of top 10 items can be streamlined.",
             "type": "style_correction",
             "long_desc": "You can just simply use .slice(0, 10) on an Array to get up to 10 items."
         },
         {
-            "title": "Retrieval of top 10 can be simplified",
+            "title": "For-Each Syntax",
             "short_desc": "Your retrieval of top 10 items can be streamlined.",
             "type": "info",
             "long_desc": "You can just simply use .slice(0, 10) on an Array to get up to 10 items."
         },
         {
-            "title": "One save file",
+            "title": "No Submission",
             "short_desc": "You only need one file to store your data.",
             "type": "major_bug",
             "long_desc": "It's okay to have more than one file to store your data, but it adds extra complexity. Imagine having more than 2 things to manage."
