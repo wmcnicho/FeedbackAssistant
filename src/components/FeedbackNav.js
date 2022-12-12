@@ -86,7 +86,7 @@ class FeedbackNav extends React.Component {
       console.log(result);
       if (result !== undefined) {
         const { path, students, feedback } = result;
-        this.setState({feedbacks: feedback?.feedback_items ?? []});
+        this.setState({feedbacks: feedback?.feedback_items ?? [], selected: 0});
         this.props.chooseDirectoryHandler(path, students, feedback);
       }
     }
@@ -131,7 +131,7 @@ class FeedbackNav extends React.Component {
                             <FeedbackNavItem
                               key={index}
                               id={fb.title}
-                              selected={fb === this.state.selected}
+                              selected={index === this.state.selected}
                               onClick={(event) => this.handleListItemClick(event, index)}
                               title={fb.title}/>
                           ))}

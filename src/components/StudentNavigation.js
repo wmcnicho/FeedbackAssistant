@@ -8,6 +8,7 @@ import { Button, Link, Tooltip, Typography } from '@mui/material';
 class StudentNavigation extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props.student?.url)
     }
 
     render() {
