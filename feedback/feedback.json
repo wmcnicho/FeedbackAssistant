@@ -3,29 +3,47 @@
     "subtitle": "Scrabble Server Starter",
     "feedback_items": [
         {
+            "title": "Retrieval of top 10 can be simplified",
+            "short_desc": "Your retrieval of top 10 items can be streamlined.",
+            "type": "positive",
+            "long_desc": "You can just simply use .slice(0, 10) on an Array to get up to 10 items."
+        },
+        {
             "title": "Inefficient file reading",
             "short_desc": "You only need to read your data file once.",
+             "type": "missing",
             "long_desc": "Once you read the file when the server first starts, you can then maintain the state in memory."
-        },
-        {
-            "title": "One save file",
-            "short_desc": "You only need one file to store your data.",
-            "long_desc": "It's okay to have more than one file to store your data, but it adds extra complexity. Imagine having more than 2 things to manage."
-        },
-        {
-            "title": "Persist before responding",
-            "short_desc": "You should persist your data before responding.",
-            "long_desc": "For this assignment, it's better practice to respond only after having written your data to storage, otherwise if the write goes wrong, the client wouldn't know."
         },
         {
             "title": "Inefficient sorting",
             "short_desc": "Your sorting can be simplified.",
+            "type": "style_good",
             "long_desc": "The easiest method is to use JavaScript's sort() function with the right comparator. Alternatively, you could use a different data structure that's more suitable for getting the top K items, or use binary search to add items."
+        },
+        {
+            "title": "Persist before responding",
+            "short_desc": "You should persist your data before responding.",
+            "type": "minor_bug",
+            "long_desc": "For this assignment, it's better practice to respond only after having written your data to storage, otherwise if the write goes wrong, the client wouldn't know."
+        },
+        
+        {
+            "title": "Retrieval of top 10 can be simplified",
+            "short_desc": "Your retrieval of top 10 items can be streamlined.",
+            "type": "style_correction",
+            "long_desc": "You can just simply use .slice(0, 10) on an Array to get up to 10 items."
         },
         {
             "title": "Retrieval of top 10 can be simplified",
             "short_desc": "Your retrieval of top 10 items can be streamlined.",
+            "type": "info",
             "long_desc": "You can just simply use .slice(0, 10) on an Array to get up to 10 items."
+        },
+        {
+            "title": "One save file",
+            "short_desc": "You only need one file to store your data.",
+            "type": "major_bug",
+            "long_desc": "It's okay to have more than one file to store your data, but it adds extra complexity. Imagine having more than 2 things to manage."
         }
     ]
 }
