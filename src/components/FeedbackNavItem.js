@@ -7,14 +7,9 @@ import StrikethroughSIcon from '@mui/icons-material/StrikethroughS';
 import InfoIcon from '@mui/icons-material/Info';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import MessageIcon from '@mui/icons-material/Message';
-import React from 'react'
-import { useTheme } from '@mui/material/styles';
+import React from 'react';
 
 class FeedbackNavItem extends React.Component {
-    constructor(props) {
-        super(props); 
-    }
-
     getAvatarIcon(fbType) {
         switch(fbType) {
             case 'missing':
