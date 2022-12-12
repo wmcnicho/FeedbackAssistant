@@ -10,5 +10,6 @@ process.once("loaded", () => {
   contextBridge.exposeInMainWorld("versions", process.versions);
   contextBridge.exposeInMainWorld("backend", {
     chooseDirectory: () => ipcRenderer.invoke('dialog:chooseDirectory'),
+    saveFeedback: (feedback, path) => ipcRenderer.invoke('dialog:saveFeedback', feedback, path),
   });
 });

@@ -1,5 +1,5 @@
 const path = require('path');
-const { fetchRepos, fetchGithubUrls, fetchFeedbackObj } = require("./utils/utils.js");
+const { fetchRepos, fetchGithubUrls, fetchFeedbackObj, saveFeedbackObj } = require("./utils/utils.js");
 const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron');
 const isDev = require('electron-is-dev');
 
@@ -22,10 +22,21 @@ async function handleChooseDirectory() {
     try {
       feedback = fetchFeedbackObj(path + "/feedback.json");
     } catch (err) {
+      console.log(err);
       feedback = {};
     }
 
     return {path, students, feedback};
+  }
+}
+
+async function handleSaveFeedback(event, feedback, path) {
+  try {
+    saveFeedbackObj(feedback, path + "/feedback.json");
+    return true;
+  } catch (err) {
+    console.log(err);
+    return false;
   }
 }
 
@@ -64,6 +75,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   ipcMain.handle('dialog:chooseDirectory', handleChooseDirectory);
+  ipcMain.handle('dialog:saveFeedback', handleSaveFeedback);
   createWindow();
 });
 

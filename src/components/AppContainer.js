@@ -31,10 +31,18 @@ class AppContainer extends React.Component {
         this.setState(newState);
     }
 
-    handleFeedbackItem(value) {
+    async handleFeedbackItem(value) {
         let newState = this.state;
         newState.feedbacks = value;
-        this.setState(newState);        
+        this.setState(newState);
+        if (this.state.directory !== "") {
+            const res = await window.backend.saveFeedback({
+                title: this.state?.title ?? "",
+                subtitle: this.state?.subtitle ?? "",
+                feedback_items: value,
+            }, this.state.directory);
+            console.log(res ? "Feedback saved successfully" : "Failed to save feedback");
+        }
     }
 
     handleClassroom(value) {
